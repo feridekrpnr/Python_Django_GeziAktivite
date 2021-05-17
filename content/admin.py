@@ -14,14 +14,15 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ContentAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'city', 'country', 'konum', 'status']
+    list_display = ['title', 'category', 'city', 'country', 'konum', 'image_tag', 'status']
+    readonly_fields = ('image_tag',)
     list_filter = ['status', 'category']
     inlines = [ContentImageInline]
 
 
 class ImagesAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content', 'image']
-
+    list_display = ['title', 'content', 'image_tag']
+    readonly_fields = ('image_tag',)
 
 admin.site.register(Category, CategoryAdmin)
 
