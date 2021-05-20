@@ -1,0 +1,45 @@
+{% extends 'homebase.html' %}
+
+
+{% block title %} İletişim-{{ setting.company}}{% endblock %}
+
+{% block keywords %}{{ setting.keywords }} {% endblock %}
+
+{% block description%}{{ setting.description }} {% endblock %}
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
+
+{% block content %}
+    <div class="main">
+  <div class="content">
+    <div class="container_12">
+      <div class="grid_9">
+
+        <ul class="grid_9">
+            <li><a href="/home">Anasayfa </a> </li>
+              <li class="active">İletişim </li>
+        </ul>
+
+    </div>
+</div>
+		<div class="row">
+            {{setting.contact|safe}}
+			<div class="col-md-6">
+
+
+		</div>
+	</div>
+	</div>
+
+        </div>
+      </div>
+
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>
+{% endblock %}
