@@ -6,12 +6,19 @@
           <div class="slider"> <a href="#" class="prev"></a><a href="#" class="next"></a>
             <ul class="items">
                  {% load static %}
-              <li><img src="{% static 'images/slide.jpg'%}" alt="">
+                 {% for rs in sliderdata %}
+              <li><img src="{{ rs.image.url}}" style="height: 350px">
                 <div class="banner">
-                  <div>THERE ARE PLENTY OF PLACES</div>
+                  <p><span>{{ rs.title }}</span></p>
+                  <h2>{{ rs.description }}</h2>
+                  <p>
+                      <a href="/category/{{rs.id}}/{{rs.slug}}" class="btn btn-primary btn-lg">Mekan Ekle</a>
+                  </p>
+
                   <br>
                   <span> that are worth seeing</span> </div>
               </li>
+                 {% endfor %}
               <li><img src="{% static 'images/slide1.jpg'%}" alt=""></li>
               <li><img src="{% static 'images/slide2.jpg'%}" alt=""></li>
               <li><img src="{% static 'images/slide3.jpg'%}" alt=""></li>

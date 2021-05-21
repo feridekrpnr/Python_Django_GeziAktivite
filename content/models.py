@@ -32,10 +32,11 @@ class Content(models.Model):
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # relation with Category table one to many
     title = models.CharField(max_length=100)
-    keywords = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    keywords = models.CharField(blank=True, max_length=255)
+    description = models.CharField(blank=True, max_length=255)
     image = models.ImageField(blank=True, upload_to='images/')
     detail = RichTextUploadingField()
+    slug = models.SlugField(blank=True)
     city = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     konum = models.CharField(max_length=255)
