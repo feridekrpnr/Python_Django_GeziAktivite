@@ -10,36 +10,55 @@
     <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
 
 {% block content %}
-    <div class="main">
   <div class="content">
     <div class="container_12">
-      <div class="grid_9">
-
-        <ul class="grid_9">
-            <li><a href="/home">Anasayfa </a> </li>
-              <li class="active">İletişim </li>
-        </ul>
-
-    </div>
-</div>
-		<div class="row">
-            {{setting.contact|safe}}
-			<div class="col-md-6">
-
-
-		</div>
-	</div>
-	</div>
-
+      <div class="grid_8">
+        <h3>Stay in Touch</h3>
+        <div class="map">
+          <figure class="img_inner fleft">
+            <iframe src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Brooklyn,+New+York,+NY,+United+States&amp;aq=0&amp;sll=37.0625,-95.677068&amp;sspn=61.282355,146.513672&amp;ie=UTF8&amp;hq=&amp;hnear=Brooklyn,+Kings,+New+York&amp;ll=40.649974,-73.950005&amp;spn=0.01628,0.025663&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+          </figure>
+          <address>
+          <dl>
+            <dt> 8901 Marmora Road,<br>
+              Glasgow, D04 89GR. </dt>
+            <dd><span>Freephone:</span>+1 800 559 6580</dd>
+            <dd><span>Telephone:</span>+1 800 603 6035</dd>
+            <dd><span>FAX:</span>+1 800 889 9898</dd>
+            <dd>E-mail: <a href="#" class="link-1">mail@demolink.org</a></dd>
+          </dl>
+          </address>
+          <address class="mb0">
+          <dl>
+            <dt> 9870 St Vincent Place,<br>
+              Glasgow, DC 45 Fr 45. </dt>
+            <dd><span>Freephone:</span>+1 800 559 6580</dd>
+            <dd><span>Telephone:</span>+1 800 603 6035</dd>
+            <dd><span>FAX:</span>+1 800 889 9898</dd>
+            <dd>E-mail: <a href="#" class="link-1">mail@demolink.org</a></dd>
+          </dl>
+          </address>
         </div>
       </div>
+      <div class="grid_4">
+        <h3>Contact Us</h3>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{message.tags}}" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="SEND FORM">
 
       </div>
       <div class="clear"></div>
     </div>
   </div>
 
-  </div>
-</body>
-</html>
+
 {% endblock %}
