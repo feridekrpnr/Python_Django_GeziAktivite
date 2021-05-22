@@ -11,11 +11,32 @@
         <ul class="sf-menu">
           <li class="current"><a href="index.html">Home</a></li>
           <li class="with_ul"><a href="about.html">About</a>
-            <ul>
-              <li><a href="#">Agency</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">Team</a></li>
-            </ul>
+           	<li>
+
+								{% load mptt_tags %}
+								<a class="fh5co-sub-ddown" href="/category/{{rs.id}}/{{rs.slug}}">Yerler</a>
+							<ul>
+								{% recursetree category %}
+									<li>
+										<a href="/category/{{node.id}}/{{node.slug}}" class="fh5co-sub-ddown" style="color: red" >{{ node.title }}</a>
+
+										{% if not node.is_leaf_node %}
+											<ul class="children" >
+												<li><a href="/category/{{node.slug}}">{{ children }}</a>
+														<ul class="children">
+															<li><a href="http://freehtml5.co/preview/?item=build-free-html5-bootstrap-template" target="_blank">{{ children }}</a></li>
+														</ul>
+													</li>
+													</li>
+
+											</ul>
+										{% endif %}
+									</li>
+								{% endrecursetree %}
+							</ul>
+
+							</li>
+
           </li>
 
           <li><a href="hakkimizda">Hakkımızda</a></li>

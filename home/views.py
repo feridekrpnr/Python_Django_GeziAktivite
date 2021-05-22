@@ -5,25 +5,29 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from home.models import Setting, ContactFormu, ContactFormMessage
-from content.models import Content, Images
+from content.models import Content, Images, Category
+
 
 def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Content.objects.all()[:4]
+    category = Category.objects.all()
     context = {'setting': setting,
                'page': 'home',
+               'category': category,
                'sliderdata': sliderdata}
     return render(request, 'index.html', context)
 
 def hakkimizda(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page': 'hakkimizda'}
+    context = {'setting': setting, 'page': 'hakkimizda', 'category': category}
     return render(request, 'hakkimizda.html', context)
 
 
 def referanslarimiz(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page': 'referanslarimiz'}
+    category = Category.objects.all()
+    context = {'setting': setting, 'page': 'referanslarimiz', 'category': category}
     return render(request, 'referanslarimiz.html', context)
 
 
@@ -47,5 +51,6 @@ def iletisim(request):
 
     setting = Setting.objects.get(pk=1)
     form = ContactFormu()
-    context = {'setting': setting, 'form': form}
+    category = Category.objects.all()
+    context = {'setting': setting, 'form': form, 'category': category}
     return render(request, 'iletisim.html', context)
