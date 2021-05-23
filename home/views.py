@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+import json
+from unicodedata import category
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -54,3 +55,14 @@ def iletisim(request):
     category = Category.objects.all()
     context = {'setting': setting, 'form': form, 'category': category}
     return render(request, 'iletisim.html', context)
+
+
+def category_contents(request,id,slug):
+    category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
+    contents =Content.objects.filter(category_id=id,  status='True')
+    context = { 'category': category,
+                'contents': contents,
+                'categorydata': categorydata
+                }
+    return render(request, 'contents.html', context)

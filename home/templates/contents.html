@@ -1,0 +1,77 @@
+{% extends 'homebase.html' %}
+
+
+{% block title %} {{ categorydata.title}} Contents {% endblock %}
+
+{% block keywords %}{{categorydata.keywords }} {% endblock %}
+
+{% block description%}{{ categorydata.description }} {% endblock %}
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
+
+{% block content %}
+    <div class="main">
+  <div class="content">
+    <div class="container_12">
+      <div class="grid_9">
+
+	<div id="fh5co-contact-section">
+		<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/home">Anasayfa </a> </li>
+              <li class="active">{{ categorydata.title}}</li>
+        </ul>
+
+    </div>
+</div>
+		<div class="row">
+            <div class="main">
+  <div class="content">
+    <div class="container_12">
+      <div class="grid_9">
+        <h3>{{ categorydata.title}} İçerikleri </h3>
+        <hr>
+        <div class="tours">
+            {% for rs in contents %}
+          <div class="grid_4 omega">
+            <div class="tour"> <img src="{{ rs.image.url}}" alt="" class="">
+              <div class="extra_wrapper">
+                <p class="text1">{{rs.title}} </p>
+                <p class="price">{{rs.price}} <span>From $ 399</span></p>
+                <a href="/content/" class="btn">Details</a> </div>
+              
+            </div>
+          </div>
+           {% endfor %}
+      </div>
+
+      <div class="grid_3">
+
+
+          <div class="clear"></div>
+            </form>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+			<div class="col-md-6">
+
+
+		</div>
+	</div>
+	</div>
+
+        </div>
+      </div>
+
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>
+{% endblock %}
