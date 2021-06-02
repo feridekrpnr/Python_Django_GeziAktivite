@@ -11,12 +11,19 @@ from content.models import Content, Images, Category
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    sliderdata = Content.objects.all()[:4]
+    sliderdata = Content.objects.all()[:1]
     category = Category.objects.all()
+    daycontents =Content.objects.all()[:1]
+    lastcontents = Content.objects.all().order_by('-id')[:1]
+    randomcontents = Content.objects.all().order_by('?')[:1]
     context = {'setting': setting,
                'page': 'home',
                'category': category,
-               'sliderdata': sliderdata}
+               'sliderdata': sliderdata,
+               'daycontents': daycontents,
+               'lastcontents': lastcontents,
+               'randomcontents':  randomcontents,
+               }
     return render(request, 'index.html', context)
 
 def hakkimizda(request):
