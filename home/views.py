@@ -13,9 +13,9 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Content.objects.all()[:1]
     category = Category.objects.all()
-    daycontents =Content.objects.all()[:1]
-    lastcontents = Content.objects.all().order_by('-id')[:1]
-    randomcontents = Content.objects.all().order_by('?')[:1]
+    daycontents =Content.objects.all()[:3]
+    lastcontents = Content.objects.all().order_by('-id')[:3]
+    randomcontents = Content.objects.all().order_by('?')[:3]
     context = {'setting': setting,
                'page': 'home',
                'category': category,
@@ -73,3 +73,13 @@ def category_contents(request,id,slug):
                 'categorydata': categorydata
                 }
     return render(request, 'contents.html', context)
+
+def content_detail(request, id, slug):
+    category = Category.objects.all()
+    content = Content.objects.get(pk=id)
+    images = Images.objects.filter(content_id=id)
+    context = {'category': category,
+               ' content': content,
+                 'images': images,
+               }
+    return render(request, 'contentdetail.html', context)

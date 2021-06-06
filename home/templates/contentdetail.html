@@ -1,0 +1,287 @@
+{% extends "homebase.html" %}
+
+{% block title %}{{ content.title }}{% endblock %}
+
+{% block keywords %}{{ content.keywords }} {% endblock %}
+
+{% block description%}{{ content.description }} {% endblock %}
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
+
+
+{% block content %}
+   <!-- end:fh5co-header -->
+<
+ <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+    <style>*{
+            margin: 0;
+            padding: 0;
+        }
+        .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
+        .rate:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+        }
+        .rate:not(:checked) > label {
+            float:right;
+            width:1em;
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:30px;
+            color:#ccc;
+        }
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+            color: #deb217;
+        }
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+            color: #c59b08;
+        }
+    </style>
+<style>
+    .mySlides {display:none;}
+</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {font-family: Arial;}
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</head>
+
+
+
+
+    <!-- page details -->
+  <div class="fh5co-parallax" style="background-image: url(images/slider1.jpg);" data-stellar-background-ratio="0.5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-0 col-sm-10 col-sm-offset-0 col-xs-10 col-xs-offset-0 text-center fh5co-table">
+					<div class="fh5co-intro fh5co-table-cell">
+						<h1 class="text-center"> {{ content.title}}</h1>
+						</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="fh5co-contact-section">
+    <div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/home">Anasayfa </a> </li>
+               <li class="active"><a href="/category/{{ content.category_id }}/{{ content.category.slug }}"> {{ content.category }} </a></li>
+			 <li class="active"> {{ content.title}}</li>
+        </ul>
+
+
+    <section class="contact py-5" id="contact">
+        <div class="container py-xl-5 py-lg-3">
+            <h2 class="w3-center"></h2>
+
+
+            <div class="w3-content w3-display-container">
+                <img class="mySlides" src="{{content.image.url}}" style="width:100%" >
+ {% for rs in images %}
+                <img class="mySlides" src="{{ rs.image.url }}" style="width:100%">
+
+{% endfor %}
+                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+
+            <script>
+                var slideIndex = 1;
+                showDivs(slideIndex);
+
+                function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                }
+
+                function showDivs(n) {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {slideIndex = 1}
+                    if (n < 1) {slideIndex = x.length}
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    x[slideIndex-1].style.display = "block";
+                }
+            </script>
+            <br><br>
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'London')">Detaylar</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Yorumlar</button>
+            </div>
+
+            <div id="London" class="tabcontent">
+                <h3> Detaylar </h3>
+                <p>{{ content.detail | safe}}</p>
+            </div>
+
+
+            <div id="Tokyo" class="tabcontent">
+
+                                <div class="">
+
+                                        <!-- dongu -->
+
+                                        <div class="">
+                                            <div class=""><span class="text-uppercase text-muted text-small"></span></div>
+                                                <div class="">
+                                                    <h6></h6>
+                                                    <div class="">
+                                                        <i class="fa fa-star{% if rs.rate < 1 %}-o text-primary{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 2 %}-o text-primary{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 3 %}-o text-primary{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 4 %}-o text-primary{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 5 %}-o text-primary{% endif %}"></i>
+                                                    </div>
+                                                    <p class="text-muted text-small"><br/></p>
+                                                </div>
+                                        </div>
+
+                                        <!-- /dongu -->
+
+                                    </div>
+                                    <br><br>
+
+                                            <h4 class="text-uppercase">Mekan Hakkındaki yorumunuz:</h4>
+
+
+
+                                                    <div class="alert alert-{{ message.tags }}" role="alert">
+
+                                                    </div>
+
+
+                                            <form class="review-form" action="" method="post">
+
+                                                <div class="form-group">
+                                                    <input class="input" type="text" name="subject" id="id_subject" placeholder="Subject">
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="input" name="comment" id="id_comment" placeholder="Your review"></textarea>
+                                                </div>
+                                                    <div class="input-rating">
+                                                        <strong class="text-uppercase">Your Rating: </strong>
+
+                                                            <section class="rate">
+                                                                <input type="radio" id="star5" name="rate" value="5" /><label for="star5" title="5 stars"></label>
+                                                                <input type="radio" id="star4" name="rate" value="4" /><label for="star4" title="4 stars"></label>
+                                                                <input type="radio" id="star3" name="rate" value="3" /><label for="star3" title="3 stars"></label>
+                                                                <input type="radio" id="star2" name="rate" value="2" /><label for="star2" title="2 stars"></label>
+                                                                <input type="radio" id="star1" name="rate" value="1" /><label for="star1" title="1 star"></label>
+                                                            </section>
+
+                                                    </div>
+                                                    <br/><br/><br/>
+
+
+                                                    <button class="main_bt">Submit</button>
+
+                                                    <b>Yorum Eklemek için <a href="/login">Login</a> olunuz!</b>
+
+
+                                            </form>
+
+                                            <br/><br/><br/>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+            <script>
+                function openCity(evt, cityName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+            </script>
+
+
+        </div>
+    </section>
+    </div>
+    </div>
+    </div>
+        </div>
+    </div>
+ </div>
+
+{% endblock %}

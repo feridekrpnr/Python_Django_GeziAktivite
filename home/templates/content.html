@@ -1,121 +1,71 @@
+ {% load static %}
 <div class="content">
-  {% for rs in daycontents %}
     <div class="container_12">
       <div class="grid_12">
         <h3>ÖNE ÇIKANLAR</h3>
       </div>
       <div class="boxes">
-        <div class="grid_4">
-          <figure>
-               {% load static %}
-            <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
-            <figcaption>
-              <h3>{{rs.title}}</h3>
-              <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
-          </figure>
-        </div>
+         {% for rs in daycontents %}
         <div class="grid_4">
           <figure>
             <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
             <figcaption>
               <h3>{{rs.title}}</h3>
-               <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
+              <a href="/content/{{rs.id}}/{{rs.slug}}" class="btn">Details</a>
+            </figcaption>
           </figure>
         </div>
-        <div class="grid_4">
-          <figure>
-            <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
-            <figcaption>
-              <h3>{{rs.title}}</h3>
-             <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
-          </figure>
-        </div>
+         {% endfor %}
         <div class="clear"></div>
       </div>
-
-
       <div class="clear"></div>
     </div>
   </div>
-{% endfor %}
-  {% for rs in lastcontents %}
-   <div class="container_12">
+<div class="content">
+    <div class="container_12">
       <div class="grid_12">
         <h3>SON EKLENENLER</h3>
       </div>
       <div class="boxes">
-        <div class="grid_4">
-          <figure>
-               {% load static %}
-            <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
-            <figcaption>
-              <h3>{{rs.title}}</h3>
-               <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
-          </figure>
-        </div>
+         {% for rs in lastcontents  %}
         <div class="grid_4">
           <figure>
             <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
             <figcaption>
               <h3>{{rs.title}}</h3>
-              <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
+              <a href="/content/{{rs.id}}/{{rs.slug}}" class="btn">Details</a>
+            </figcaption>
           </figure>
         </div>
-        <div class="grid_4">
-          <figure>
-            <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
-            <figcaption>
-              <h3>{{rs.title}}</h3>
-              <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
-          </figure>
-        </div>
+         {% endfor %}
         <div class="clear"></div>
       </div>
-
-
       <div class="clear"></div>
     </div>
   </div>
-{% endfor %}
-  {% for rs in  randomcontents %}
-   <div class="container_12">
+ <div class="content">
+    <div class="container_12">
       <div class="grid_12">
         <h3>SİZİN İÇİN SEÇTİKLERİMİZ</h3>
       </div>
       <div class="boxes">
-        <div class="grid_4">
-          <figure>
-               {% load static %}
-            <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
-            <figcaption>
-              <h3>{{rs.title}}</h3>
-               <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}"  class="btn">Details</a> </figcaption>
-          </figure>
-        </div>
+         {% for rs in randomcontents  %}
         <div class="grid_4">
           <figure>
             <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
             <figcaption>
               <h3>{{rs.title}}</h3>
-              <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
+              <a href="/content/{{rs.id}}/{{rs.slug}}" class="btn">Details</a>
+            </figcaption>
           </figure>
         </div>
-        <div class="grid_4">
-          <figure>
-            <div><img src="{{ rs.image.url}}" style="height: 400px" alt=""></div>
-            <figcaption>
-              <h3>{{rs.title}}</h3>
-             <a href="/content/{{rs.id}}/{{rs.slug}}/{{rs.title}}" class="btn">Details</a> </figcaption>
-          </figure>
-        </div>
+         {% endfor %}
         <div class="clear"></div>
       </div>
-
-
       <div class="clear"></div>
     </div>
   </div>
- {% endfor %}
+
   <div class="bottom_block">
     <div class="container_12">
       <div class="grid_2 prefix_2">
