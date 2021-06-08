@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
+from home.forms import SearchForm
 from home.models import Setting, ContactFormu, ContactFormMessage
 from content.models import Content, Images, Category, Comment
 
@@ -86,4 +87,21 @@ def contentdetail(request, id, slug):
                }
 
     return render(request, 'contentdetail.html', context)
+
+
+def content_search(request):
+
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            content = Content.objects.filter(title__icontains=query)
+            context = {'content': content,
+                       'category': category,
+                       }
+            return render(request, 'content_search.html', context)
+
+    return HttpResponseRedirect('/')
+
 

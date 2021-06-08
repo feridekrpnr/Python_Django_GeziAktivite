@@ -32,6 +32,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('category/<int:id>/<slug:slug>/', views.category_contents, name='category_contents'),
     path('content/<int:id>/<slug:slug>/', views.contentdetail, name='contentdetail'),
+    path('search/', views.content_search, name='content_search'),
 ]
 if settings.DEBUG:  # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

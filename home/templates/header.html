@@ -6,6 +6,42 @@
       <div class="clear"></div>
     </div>
 
+       <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span>
+	  			<i class="fa fa-search">
+					<img src="\uploads\images\search.jpg" style="height:20px">
+				</i>
+      </button>
+                <div id="search" class="collapse">
+                    <div class="container">
+                        <form role="search" class="ml-auto" action="/search/" method="post">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <select class="form-control" name="catid">
+                                        <option value="0">All Categories</option>
+                                        {% load mptt_tags %}
+                                        {% recursetree category %}
+                                            {% if  node.is_leaf_node %}
+                                                <option value="{{ node.id }}">{{ node.title }}</option>
+                                            {% endif %}
+                                            {% if not node.is_leaf_node %}
+                                                <optgroup label="{{ node.title }}">
+                                                    {{ children }}
+                                                </optgroup>
+                                            {% endif %}
+                                        {% endrecursetree %}
+                                    </select>
+                                </div>
+                                <input id="query" type="text" name="query" placeholder="Search" class="form-control">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search">Ara</i></button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
     <div class="menu_block">
      <nav>
         <ul class="sf-menu">

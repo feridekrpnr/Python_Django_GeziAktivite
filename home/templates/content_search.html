@@ -1,0 +1,65 @@
+{% extends "homebase.html" %}
+
+{% block title %} Content Search Results {% endblock %}
+{% block keywords %} {{ categorydata.keywords }} {% endblock %}
+{% block description %} {{ categorydata.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+{% endblock %}
+
+
+{% block content %}
+   <!-- end:fh5co-header -->
+
+
+	<div id="fh5co-contact-section">
+		<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/home">Anasayfa </a> </li>
+              <li class="active"></li>
+        </ul>
+	</div>
+</div>
+		<div class="col-lg-12" id="basket">
+                        <div class="box">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th >Image</th>
+                                        <th colspan="2">content</th>
+                                        <th>Category</th>
+                                        <th>Fiyat</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for rs in content %}
+                                    <tr>
+                                        <td><a href="/content/{{ rs.id }}/{{ rs.slug }}"><img alt="{{ rs.title }}" src="{{ rs.image.url }}" style="height: 200px"></a></td>
+                                        <td><a href="/content/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></td>
+                                        <td></td>
+                                        <td><a href="/category/{{ rs.category.id }}/{{ rs.category.slug }}">{{ rs.category.title }}</a></td>
+                                        <td>{{ rs.base_price}}</td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+</div>
+
+{% endblock %}
