@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from home.models import Setting, ContactFormu, ContactFormMessage
-from content.models import Content, Images, Category
+from content.models import Content, Images, Category, Comment
 
 
 def index(request):
@@ -67,19 +67,23 @@ def iletisim(request):
 def category_contents(request,id,slug):
     category = Category.objects.all()
     categorydata = Category.objects.get(pk=id)
-    contents =Content.objects.filter(category_id=id,  status='True')
+    contents =Content.objects.filter(category_id=id, status='True')
     context = { 'category': category,
                 'contents': contents,
                 'categorydata': categorydata
                 }
     return render(request, 'contents.html', context)
 
-def content_detail(request, id, slug):
+def contentdetail(request, id, slug):
     category = Category.objects.all()
     content = Content.objects.get(pk=id)
+    comments = Comment.objects.filter(content_id=id, status='True')
     images = Images.objects.filter(content_id=id)
     context = {'category': category,
-               ' content': content,
-                 'images': images,
+               'content': content,
+               'images': images,
+               'comments': comments,
                }
+
     return render(request, 'contentdetail.html', context)
+

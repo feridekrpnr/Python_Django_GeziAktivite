@@ -189,37 +189,42 @@
 
                                         <!-- dongu -->
 
+                                         {% for rs in comments %}
                                         <div class="">
-                                            <div class=""><span class="text-uppercase text-muted text-small"></span></div>
+                                            <div class=""><span class="text-uppercase text-muted text-small">{{ rs.create_at }}</span></div>
                                                 <div class="">
-                                                    <h6></h6>
+                                                    <h6>{{ rs.user.first_name }}</h6>
                                                     <div class="">
                                                         <i class="fa fa-star{% if rs.rate < 1 %}-o text-primary{% endif %}"></i>
                                                         <i class="fa fa-star{% if rs.rate < 2 %}-o text-primary{% endif %}"></i>
                                                         <i class="fa fa-star{% if rs.rate < 3 %}-o text-primary{% endif %}"></i>
                                                         <i class="fa fa-star{% if rs.rate < 4 %}-o text-primary{% endif %}"></i>
                                                         <i class="fa fa-star{% if rs.rate < 5 %}-o text-primary{% endif %}"></i>
-                                                    </div>
-                                                    <p class="text-muted text-small"><br/></p>
+                                                    <</div>
+                                                    <p class="text-muted text-small">{{ rs.comment }}<br/></p>
                                                 </div>
                                         </div>
+                                        {% endfor %}
+
 
                                         <!-- /dongu -->
 
                                     </div>
                                     <br><br>
 
-                                            <h4 class="text-uppercase">Mekan Hakkındaki yorumunuz:</h4>
+                                               <h4 class="text-uppercase">Mekan Hakkındaki yorumunuz:</h4>
 
 
-
+                                            {% if messages %}
+                                                {%for message in messages%}
                                                     <div class="alert alert-{{ message.tags }}" role="alert">
-
+                                                        {{ message }}
                                                     </div>
+                                                {% endfor %}
+                                            {% endif %}
 
-
-                                            <form class="review-form" action="" method="post">
-
+                                            <form class="review-form" action="/content/addcomment/{{ content.id }}" method="post">
+                                                {% csrf_token %}
                                                 <div class="form-group">
                                                     <input class="input" type="text" name="subject" id="id_subject" placeholder="Subject">
                                                 </div>
@@ -240,13 +245,14 @@
                                                     </div>
                                                     <br/><br/><br/>
 
-
+                                                {% if user.id is not None %}
                                                     <button class="main_bt">Submit</button>
-
+                                                {% else %}
                                                     <b>Yorum Eklemek için <a href="/login">Login</a> olunuz!</b>
-
+                                                {% endif %}
 
                                             </form>
+
 
                                             <br/><br/><br/>
                                         </div>
