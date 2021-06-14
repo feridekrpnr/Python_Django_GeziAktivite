@@ -1,17 +1,39 @@
-<header>
-  <div class="container_12">
+{% load static %}
+
+<div id="fh5co-wrapper"></div>
+<div id="fh5co-page"></div>
+<div id="fh5co-header"></div>
+
+	<script>
+
+    $(function () {
+        $("#query").autocomplete({
+            source: "/search_auto/",
+            select: function (event, ui) { //item selected
+                AutoCompleteSelectHandler(event, ui)
+            },
+            minLength: 2,
+        });
+    });
+
+    function AutoCompleteSelectHandler(event, ui) {
+        var selectedObj = ui.item;
+    }
+
+	</script>
+
+  <header>
+ <div class="container_12">
     <div class="grid_12">
-         {% load static %}
+
       <h1><a href="index.html"><img src="{% static 'images/logo.png'%}" alt=""></a></h1>
       <div class="clear"></div>
+
     </div>
 
-       <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span>
-	  			<i class="fa fa-search">
-					<img src="\uploads\images\search.jpg" style="height:20px">
-				</i>
-      </button>
-                <div id="search" class="collapse">
+
+
+               <div id="search" class="collapse">
                     <div class="container">
                         <form role="search" class="ml-auto" action="/search/" method="post">
                             {% csrf_token %}
@@ -32,15 +54,13 @@
                                         {% endrecursetree %}
                                     </select>
                                 </div>
-                                <input id="query" type="text" name="query" placeholder="Search" class="form-control">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search">Ara</i></button>
-                                </div>
+                                <input id="query" type="text" name="query" placeholder="Search" class="form-control"><img src="\uploads\images\search.jpg" style="height:20px"><button type="submit" class="btn btn-primary"><i class="fa fa-search">Ara</i></button>
 
                             </div>
                         </form>
                     </div>
                 </div>
+
 
     <div class="menu_block">
      <nav>
@@ -57,7 +77,8 @@
 										<a href="/category/{{node.id}}/{{node.slug}}" class="fh5co-sub-ddown" style="color: red" >{{ node.title }}</a>
 
 										{% if not node.is_leaf_node %}
-											<ul class="children" >
+
+											<ul class="children">
 												<li><a href="/category/{{node.slug}}">{{ children }}</a>
 														<ul class="children">
 															<li><a href="http://freehtml5.co/preview/?item=build-free-html5-bootstrap-template" target="_blank">{{ children }}</a></li>
@@ -84,4 +105,5 @@
     </div>
     <div class="clear"></div>
    </div>
+
 </header>

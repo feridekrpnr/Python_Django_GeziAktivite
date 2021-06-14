@@ -12,7 +12,7 @@ from content.models import Content, Images, Category, Comment
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    sliderdata = Content.objects.all()[:1]
+    sliderdata = Content.objects.all()[:3]
     category = Category.objects.all()
     daycontents =Content.objects.all()[:3]
     lastcontents = Content.objects.all().order_by('-id')[:3]
@@ -90,18 +90,40 @@ def contentdetail(request, id, slug):
 
 
 def content_search(request):
-
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
             category = Category.objects.all()
             query = form.cleaned_data['query']
-            content = Content.objects.filter(title__icontains=query)
+            catid = form.cleaned_data['catid']
+            if catid == 0:
+                content = Content.objects.filter(title__icontains=query)
+            else:
+
+                content = Content.objects.filter(title__icontains=query, category_id=catid)
+
             context = {'content': content,
                        'category': category,
                        }
+
             return render(request, 'content_search.html', context)
 
     return HttpResponseRedirect('/')
+
+def content_search_auto(request):
+  if request.is_ajax():
+    q = request.GET.get('term', '')
+    content = Content.objects.filter(title__icontains=q)
+    results = []
+    for rs in content:
+      content_json = {}
+      content_json = rs.title
+      results.append(content_json)
+    data = json.dumps(results)
+  else:
+    data = 'fail'
+  mimetype = 'application/json'
+  return HttpResponse(data, mimetype)
+
 
 

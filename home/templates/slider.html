@@ -1,31 +1,90 @@
+
 <div class="main">
   <div class="container_12">
     <div class="grid_12">
       <div class="slider-relative">
         <div class="slider-block">
-          <div class="slider"> <a href="#" class="prev"></a><a href="#" class="next"></a>
+           <div class="slider"> <a href="#" class="prev"></a><a href="#" class="next"></a>
             <ul class="items">
                  {% load static %}
+              <li><img src="{% static 'images/slide.jpg'%}" alt="">
                  {% for rs in sliderdata %}
-              <li><img src="{{ rs.image.url}}" style="height: 500px">
+                 <img src="{{ rs.image.url }}" style="height: 350px">
                 <div class="banner">
+
+                  <div>THERE ARE PLENTY OF PLACES</div>
+
                   <p><span>{{ rs.title }}</span></p>
                   <h2>{{ rs.description }}</h2>
                   <p>
-                      <a href="/content/{{rs.id}}/{{rs.slug}}" class="btn btn-primary btn-lg">Mekan Ekle</a>
+                      <a href="/category/{{rs.id}}/{{rs.slug}}" class="btn btn-primary btn-lg">Mekan Ekle</a>
                   </p>
 
                   <br>
                   <span> that are worth seeing</span> </div>
               </li>
-                 {% endfor %}
-              <li><img src="{% static 'images/slide1.jpg'%}" alt=""></li>
-              <li><img src="{% static 'images/slide2.jpg'%}" alt=""></li>
-              <li><img src="{% static 'images/slide3.jpg'%}" alt=""></li>
+
+              <li><img src="{{ rs.image.url }}" alt=""></li>
+              {% endfor %}
             </ul>
+
           </div>
         </div>
-      </div>
+
     </div>
   </div>
 </div>
+
+
+
+<!--
+
+
+!>
+<div class="main">
+  <div class="container_12">
+    <div class="grid_12">
+<div class="slider-relative">
+        <div class="slider-block">
+          <div class="slider" style="overflow: hidden;"> <a href="#" class="prev"></a><a href="#" class="next"></a>
+            <ul class="items">
+              <li style="display: none;"><img src="images/slide.jpg" alt="">
+
+              </li>
+              <li style="display: none;"><img src="images/slide.jpg" alt=""></li>
+              <li style="display: none;"><img src="images/slide1.jpg" alt=""></li>
+              <li style="display: none;"><img src="images/slide2.jpg" alt=""></li>
+            </ul>
+          <div class="pic" style="overflow: hidden; width: 1127px; height: 724px; background: url(&quot;images/slide3.jpg&quot;) 0px 0px no-repeat;"><div class="mask" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 1;"><div style="left: 0px; top: 0px; position: absolute; width: 1127px; height: 724px; background-position: 0px 0px; background-image: url(&quot;images/slide3.jpg&quot;); z-index: 2; opacity: 1; display: none;"></div></div></div><div class="banner" style="z-index: 999;">
+                  <div>THERE ARE PLENTY OF PLACES</div>
+                  <br>
+                  <span> that are worth seeing</span> </div></div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  <div class="pic" style="overflow: hidden; width: 1127px; height: 724px;
+  background: url(&quot;images/slide2.jpg&quot;) 0px 0px no-repeat;">
+  <div class="mask" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 1;">
+  <div style="left: 0px; top: 0px; position: absolute; width: 1127px; height: 724px; background-position: 0px 0px; background-image: url(&quot;images/slide2.jpg&quot;); z-index: 2; opacity: 1; display: none;">
+  </div>
+  </div>
+  </div>
+
+
+C:\Django\Python_Django_GeziAktivite\home\templates\slider.html
+
+C:\Django\Python_Django_GeziAktivite\home\templates\images\slide.jpg
+
+abant
+
+
+
+
+  -->
+    </div>
