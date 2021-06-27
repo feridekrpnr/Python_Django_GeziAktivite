@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
-from home.forms import SearchForm
+from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage
 from content.models import Content, Images, Category, Comment
 
@@ -147,3 +147,24 @@ def login_view(request):
     category = Category.objects.all()
     context = {'category': category, }
     return render(request, 'login.html', context)
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+
+    form = SignUpForm()
+    category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
+    context = {'category': category,
+               'form': form,
+               'setting': setting,
+               }
+
+    return render(request, 'signup.html', context)

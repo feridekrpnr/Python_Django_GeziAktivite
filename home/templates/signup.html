@@ -1,6 +1,6 @@
 {% extends "homebase.html" %}
 
-{% block title %}Login-{{ setting.company }}{% endblock %}
+{% block title %}Singup-{{ setting.company }}{% endblock %}
 
 {% block keywords %}{{ setting.keywords }} {% endblock %}
 
@@ -18,7 +18,7 @@
 			<div class="row">
 				<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
 					<div class="fh5co-intro fh5co-table-cell">
-						<h1 class="text-center">Login</h1>
+						<h1 class="text-center">Sing Up</h1>
 						</div>
 
 				</div>
@@ -31,7 +31,7 @@
     <div class="container">
         <ul class="breadcrumb">
             <li><a href="/home">Anasayfa </a> </li>
-              <li class="active">Login </li>
+              <li class="active">Sing Up </li>
         </ul>
 
     </div>
@@ -44,8 +44,8 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="box">
-                        <h2 class="text-uppercase">Login Formu</h2>
-                        <p class="lead">Already have you account?</p>
+                        <h2 class="text-uppercase">Sing Up Formu</h2>
+
                         {% if messages %}
                             {% for message in messages %}
                                 <div class="alert alert-{{ message.tags }}" role="alert">
@@ -54,30 +54,39 @@
                             {% endfor %}
                         {% endif %}
                         <hr>
-                        <form section="" method="post">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input id="username" name="username" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input id="password" name="password" type="password" class="form-control">
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i>
-                                    Login
-                                </button>
-                            </div>
-                        </form>
+                        <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+
+                    <p>
+    {{ field.label_tag }}
+                    <div class="form-group">
+
+                        {{ field }}
+                            {% if field.help_text %}
+                        <small style="color: gray">{{ field.help_text }}</small>
+                    {% endif %}
+                    </div>
+
+                    {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                    </p>
+                 {% endfor %}
+                <p class="text-center">
+                    <button class="btn btn-primary" type="submit" value="Login"><i class="fa fa-user-plus"></i> Sing up
+                    </button>
+                </p>
+            </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-                        </div>
-                </div>
+
+
 
 
                 </div>
@@ -87,4 +96,4 @@
     </div>
     <!-- /section -->
 		</div>
-{% endblock %}
+    {% endblock %}
