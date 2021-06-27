@@ -104,6 +104,50 @@
       <div class="clear"></div>
     </div>
     <div class="clear"></div>
-   </div>
+                           <li><a style="color: black" href="/sss">SSS</a></li>
+							<li>
+                                {% if user.id is not None %}
+                            <a  style="color: black" href="">{{ user.first_name }} <span class="" aria-hidden="true"></span></a>
+                           <ul>
+                                <li>
+                                    <a class="dropdown-item" href=""> <img class="img-profile rounded-circle" src="{{ user.userprofile.image.url }}" style="max-width: 60px">
+                                        <br>
+                                    </a>
+                                </li>
+                                <li>
 
-</header>
+                                    <a style="color: black" href="/user/" class="dropdown-item" >
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400">My account</i>
+
+                                    </a>
+
+                                </li>
+                                <li>
+
+                                        <a style="color: black" href="/logout/" class="dropdown-item" >
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400">Logout</i>
+
+                                        </a>
+
+                                </li>
+
+                            </ul>
+                                {% else %}
+
+                            <li><a style="color: black" href="/login/">Login</a></li>
+                            <li><a  style="color: black" href="/signup/">Sign up</a></li>
+
+                                {% endif %}
+
+
+            <!-- //nav -->
+
+
+				</div>
+	</li>
+</nav>
+
+
+		</header>
+
+		</div>

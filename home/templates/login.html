@@ -1,0 +1,90 @@
+{% extends "homebase.html" %}
+
+{% block title %}Login-{{ setting.company }}{% endblock %}
+
+{% block keywords %}{{ setting.keywords }} {% endblock %}
+
+{% block description%}{{ setting.description }} {% endblock %}
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
+
+
+{% block content %}
+   <!-- end:fh5co-header -->
+
+	<div class="fh5co-parallax" style="background-image: url(images/slider1.jpg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
+					<div class="fh5co-intro fh5co-table-cell">
+						<h1 class="text-center">Login</h1>
+						</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/home">Anasayfa </a> </li>
+              <li class="active">Login </li>
+        </ul>
+
+    </div>
+
+			 <!-- section -->
+    <div class="section">
+
+        <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="box">
+                        <h2 class="text-uppercase">Login Formu</h2>
+                        <p class="lead">Already have you account?</p>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <hr>
+                        <form section="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input id="username" name="username" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="password" class="form-control">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i>
+                                    Log in
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                        </div>
+                </div>
+
+
+                </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+		</div>
+{% endblock %}
