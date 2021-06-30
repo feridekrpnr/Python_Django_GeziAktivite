@@ -1,0 +1,69 @@
+ {% extends "homebase.html" %}
+
+{% block title %} Sıkça sorulan sorular {% endblock %}
+{% block keywords %}  {% endblock %}
+{% block description %}  {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+<script>
+  $( function() {
+    $( "#accordion" ).accordion({
+    collapsible: true
+
+    });
+  } );
+  </script>
+{% endblock %}
+
+
+{% block content %}
+
+
+	<div class="fh5co-parallax" style="background-image: url(images/slider1.jpg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
+					<div class="fh5co-intro fh5co-table-cell">
+						<h1 class="text-center">Sıkça Sorulan Sorular</h1>
+						</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+<div id="fh5co-contact-section">
+		<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/home">Anasayfa </a> </li>
+              <li class="active">Sıkça Sorulan Sorular </li>
+        </ul>
+
+    </div>
+</div>
+    <div id="content">
+        <div class="container">
+
+            <div class="row bar">
+
+                <div class="col-md-9">
+                   {% for rs in faq %}
+                      <div id="accordion">
+
+                      <h3>  {{ rs.question }}</h3>
+                        <p>{{ rs.answer }}</p>
+
+                      <div>
+                  {% endfor %}
+                </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

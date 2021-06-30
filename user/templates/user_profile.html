@@ -1,0 +1,84 @@
+{% extends "homebase.html" %}
+
+
+{% block title %} {{ profile.user_name }} Profile {% endblock %}
+
+{% block keywords %}{{ setting.keywords }} {% endblock %}
+
+{% block description%}{{ setting.description }} {% endblock %}
+{% block head %}
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
+
+
+{% block content %}
+  <div class="grid_3">
+        <h3>User Profile</h3>
+       <ul class="">
+                                <li class="nav-item"><a href="/user/contents" class="nav-link active"><i
+                                        class="fa fa-list"></i> My contents</a></li>
+                                <li class="nav-item"><a href="/user/comments " class="nav-link"><i
+                                        class="fa fa-comment"></i> My comments</a></li>
+                                <li class="nav-item"><a href="/user " class="nav-link"><i class="fa fa-user"></i> My
+                                    account</a></li>
+
+                                <li class="nav-item"><a href="/logout/" class="nav-link"><i class="fa fa-sign-out"></i>
+                                    Logout</a></li>
+       </ul>
+   </div>
+
+
+
+ <div id="customer-orders" class="col-md-9">
+    <div class="box mt-0 mb-lg-0">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="text-left">
+                        <a href="/user/update" class="btn btn-template-outlined">Update Profile</a>
+                        <a href="/user/password" class="btn btn-template-outlined">Change Password</a>
+                    </th>
+                    <td><img src="{{ profile.image.url }}" style="height: 150px; border-radius: 45px"></td>
+                </tr>
+                <tr>
+                    <th>Name Surname</th>
+                    <th>{{ profile.user.first_name }}</th>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ profile.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ profile.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ profile.address }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ profile.city }}</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>{{ profile.country }}</td>
+                </tr>
+
+                </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

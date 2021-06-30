@@ -1,0 +1,45 @@
+<div id="customer-orders" class="col-md-9">
+    <div class="box mt-0 mb-lg-0">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+<td><img src="{{ profile.image.url }}" style="height: 150px; border-radius: 45px"></td>
+                <tr>
+                    <th>Name Surname</th>
+                    <th>{{ profile.user.first_name }}</th>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ profile.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ profile.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ profile.address }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ profile.city }}</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>{{ profile.country }}</td>
+                </tr>
+
+                </tr>
+                <tr>
+                    <th class="text-left">
+                        <a href="/user/update" class="btn btn-template-outlined">Update Profile</a>
+                        <a href="/user/password" class="btn btn-template-outlined">Change Password</a>
+                    </th>
+
+                </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+</div>
