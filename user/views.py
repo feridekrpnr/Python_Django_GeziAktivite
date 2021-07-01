@@ -1,14 +1,15 @@
 from pyexpat.errors import messages
 
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
-from content.models import Category
+from content.models import Category, Comment
 
 # Create your views here.
-from home.models import UserProfile
+from home.models import UserProfile, Setting
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
 
@@ -16,7 +17,6 @@ def index(request):
     category = Category.objects.all()
     current_user = request.user
     profile = UserProfile.objects.get(user_id=current_user.id)
-
     context = {'category': category,
                'profile': profile,
                }
@@ -31,7 +31,7 @@ def user_update(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-           # messages.success(request, 'ok')
+            #messages.success(request, 'ok')
             return redirect('/user')
 
     else:
@@ -53,7 +53,7 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'şifreniz başarı bir şekilde kaydedilmiştir')
+          #  messages.success(request, 'şifreniz başarı bir şekilde kaydedilmiştir')
             return HttpResponseRedirect('/user')
         else:
            # messages.error(request, 'ERROR<br>' + str(form.errors))
@@ -67,3 +67,24 @@ def change_password(request):
             'category': category,
 
         })
+
+
+
+def comments(request):
+    category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
+    current_user = request.user
+    comments = Comment.objects.filter(user_id=current_user)
+    context = {
+        'category': category,
+        'comments': comments,
+        'setting': setting,
+    }
+    return render(request, 'user_comments.html', context)
+
+@login_required(login_url='/login')
+def deletecomment(request, id):
+    current_user = request.user
+    Comment.objects.filter(id=id, user_id=current_user.id).delete()
+    #messages.success(request, 'comment deleted')
+    return HttpResponseRedirect('/user/comments')
