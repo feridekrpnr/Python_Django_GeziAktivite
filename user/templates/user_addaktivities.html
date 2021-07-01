@@ -18,36 +18,34 @@ table, th, td {
     <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
 
 
-
 {% block content %}
 
-
-
- <div id="heading-breadcrumbs">
+    <div id="heading-breadcrumbs">
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">User Profile</h1>
+                    <h1 class="h2">User Comments</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active">User Information</li>
+                        <li class="breadcrumb-item active">User Aktivities</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
     <div id="content">
         <div class="container">
             <div class="row bar">
+
                 <div class="col-lg-9">
-                    <h2>UPDATE INFORMATION</h2>
+                    <h2>ADD Aktivities</h2>
                     <hr>
                     <div class="media">
                         <img src="{{ user.userprofile.image.url }}" style="height: 150px; border-radius: 45px">
                     </div>
+                    <br>
                     {% if messages %}
                         {% for message in messages %}
                             <div id=" sendmessage " class="alert alert-{{ message.tags }}" ROLE="alert">
@@ -55,41 +53,42 @@ table, th, td {
                             </div>
                         {% endfor %}
                     {% endif %}
-                    <table>
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" >
                         {% csrf_token %}
-                        <fieldset class="form-group">
-
-                          <th>
-                           <br> {{ user_form.as_p }}
-                           <br> {{ profile_form.as_p }}
-                            </th>
-                          </fieldset>
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Update</button>
+                        <fieldset class="form-group" >
+                            {{ form.media }}
+                            {{ form.as_p }}
+                        </fieldset>
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-primary" type="submit">SAVE</button>
                         </div>
-
                     </form>
-                        </table>
                 </div>
 
-            </div>
-        </div>
-    </div>
-<div class="grid_3">
-        <h3>User Profile</h3>
-       <ul class="">
-                                <li class="nav-item"><a href="/user/aktivities" class="nav-link active"><i
-                                        class="fa fa-list"></i> My aktivities</a></li>
+                <div class="col-lg-3 mt-4 mt-lg-0">
+                    <!-- CUSTOMER MENU -->
+                    <div class="panel panel-default sidebar-menu">
+                        <div class="panel-heading">
+                            <h3 class="h4 panel-title">Customer section</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills flex-column text-sm">
+                                <li class="nav-item"><a href="" class="nav-link active"><i
+                                        class="fa fa-user"></i> My Account</a></li>
+                                   <li class="nav-item"><a href="/user/contents" class="nav-link"><i
+                                        class="fa fa-list"></i> My Content List</a></li>
                                 <li class="nav-item"><a href="/user/comments " class="nav-link"><i
                                         class="fa fa-comment"></i> My comments</a></li>
                                 <li class="nav-item"><a href="/user " class="nav-link"><i class="fa fa-user"></i> My
                                     account</a></li>
-
                                 <li class="nav-item"><a href="/logout/" class="nav-link"><i class="fa fa-sign-out"></i>
                                     Logout</a></li>
-       </ul>
-   </div>
-
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

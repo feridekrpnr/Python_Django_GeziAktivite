@@ -30,9 +30,6 @@
       <div class="clear"></div>
 
     </div>
-
-
-
                <div id="search" class="collapse">
                     <div class="container">
                         <form role="search" class="ml-auto" action="/search/" method="post">
@@ -66,7 +63,8 @@
      <nav>
         <ul class="sf-menu">
           <li class="current"><a href="/home">Home</a></li>
-          <li class="with_ul"><a href="about.html">About</a>
+            <li><a href="/iletisim">İLETİŞİM</a></li>
+
            	<li>
 
 								{% load mptt_tags %}
@@ -96,19 +94,15 @@
 
           </li>
 
-          <li><a href="hakkimizda">Hakkımızda</a></li>
-          <li><a href="iletisim">İLETİŞİM</a></li>
+          <li><a href="/hakkimizda">Hakkımızda</a></li>
+
           <li><a href="/referanslarimiz">Referanslar</a></li>
-        </ul>
-      </nav>
-      <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-                           <li><a style="color: black" href="/sss">SSS</a></li>
-							<li>
-                                {% if user.id is not None %}
+
+
+          <li>
+                            {% if user.id is not None %}
                             <a  style="color: black" href="">{{ user.first_name }} <span class="" aria-hidden="true"></span></a>
-                           <ul>
+                            <ul>
                                 <li>
                                     <a class="dropdown-item" href=""> <img class="img-profile rounded-circle" src="{{ user.userprofile.image.url }}" style="max-width: 60px">
                                         <br>
@@ -122,6 +116,16 @@
                                     </a>
 
                                 </li>
+
+
+                                   <li>
+                                    <a style="color: black" href="/user/comments" class="dropdown-item" >
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"> My comments</i>
+
+                                    </a>
+
+                                </li>
+
                                 <li>
 
                                         <a style="color: black" href="/logout/" class="dropdown-item" >
@@ -132,19 +136,18 @@
                                 </li>
 
                             </ul>
-                                {% else %}
-
+                        </li>
+  {% else %}
                             <li><a style="color: black" href="/login/">Login</a></li>
-                            <li><a  style="color: black" href="/signup">Sign up</a></li>
+                            <li><a  style="color: black" href="/signup/">Sign up</a></li>
 
-                                {% endif %}
+{% endif %}
+ <li><a  href="/faq">SSS</a></li>
+        </ul>
+      </nav>
 
 
-            <!-- //nav -->
 
-
-				</div>
-	</li>
 </nav>
 
 

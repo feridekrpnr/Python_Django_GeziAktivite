@@ -1,0 +1,122 @@
+{% extends "homebase.html" %}
+
+
+{% block title %} {{ profile.user_name }} Profile {% endblock %}
+
+{% block keywords %}{{ setting.keywords }} {% endblock %}
+
+{% block description%}{{ setting.description }} {% endblock %}
+{% block head %}
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
+
+
+{% block content %}
+
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row d-flex align-items-center flex-wrap">
+                <div class="col-md-7">
+                    <h1 class="h2">User Comments</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb d-flex justify-content-end">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">User Comments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div id="customer-orders" class="col-md-9">
+    <div class="box mt-0 mb-lg-0">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                     {% if messages %}
+                        {% for message in messages %}
+                            <div id=" sendmessage " class="alert alert-{{ message.tags }}" ROLE="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                <thead>
+
+                <tr>
+                    <th class="text-left">
+                        <a href="/user/addcontent" class="btn btn-template-outlined">Add Content</a>
+
+                    </th>
+
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Gallery</th>
+                    <th>Date</th>
+                    <th>Detail</th>
+
+                </tr>
+                </thead>
+                  <tbody>
+                            {% for rs in aktivite %}
+                                <tr>
+                                    <td ><img src="{{ rs.image.url }}" style="height: 30px;"></td>
+                                    <td><a href="/place/{{ user.id }}/{{ rs.slug }}"> {{ rs.title }}</a></td>
+                                    <td>{{ rs.type }}</td>
+                                    <td>{{ rs.category.title }}</td>
+                                    <td>{{ rs.status }}</td>
+                                     <td><a href="javascript:;" onclick="window.open('/user/contentaddimge/{{ rs.id }}','gallery','height=600,width=800,top=50,left=150')">
+                                          <img style="height: 40px; width: 40px" src="{% static '' %}img/gallery.png"> </a> </td>
+
+                                    <td>{{ rs.create_at }}</td>
+                                    <td nowrap><a class="btn btn-danger" href="/user/contentedit/{{ rs.id }}" >Edit</a>
+                                               <a class="btn btn-danger" href="/user/contentdelete/{{ rs.id }}" onclick="return confirm('Will be delete ! Are you sure?')">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+                <div class="col-lg-3 mt-4 mt-lg-0">
+                    <!-- CUSTOMER MENU -->
+                    <div class="panel panel-default sidebar-menu">
+                        <div class="panel-heading">
+                            <h3 class="h4 panel-title">Customer section</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills flex-column text-sm">
+                                <li class="nav-item"><a href="" class="nav-link active"><i
+                                        class="fa fa-user"></i> My Account</a></li>
+                                       <li class="nav-item"><a href="/user/contents" class="nav-link"><i
+                                        class="fa fa-list"></i> My Content List</a></li>
+                                <li class="nav-item"><a href="/user/comments " class="nav-link"><i
+                                        class="fa fa-comment"></i> My comments</a></li>
+                                <li class="nav-item"><a href="/user " class="nav-link"><i class="fa fa-user"></i> My
+                                    account</a></li>
+                                <li class="nav-item"><a href="/logout/" class="nav-link"><i class="fa fa-sign-out"></i>
+                                    Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

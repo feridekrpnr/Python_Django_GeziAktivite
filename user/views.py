@@ -6,7 +6,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
-from content.models import Category, Comment
+from aktivite.models import Aktivite, AktiviteImageForm
+from content.models import Category, Comment, Content, Images
 
 # Create your views here.
 from home.models import UserProfile, Setting
@@ -88,3 +89,5 @@ def deletecomment(request, id):
     Comment.objects.filter(id=id, user_id=current_user.id).delete()
     #messages.success(request, 'comment deleted')
     return HttpResponseRedirect('/user/comments')
+
+

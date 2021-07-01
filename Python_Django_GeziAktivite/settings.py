@@ -28,6 +28,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'aktivite.apps.AktiviteConfig',
     'user.apps.UserConfig',
     'content.apps.ContentConfig',
     'home.apps.HomeConfig',

@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
+from aktivite.models import UserContents, AktiviteImages, Menu, Aktivite
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile, FAQ
 from content.models import Content, Images, Category, Comment
@@ -14,7 +15,7 @@ from content.models import Content, Images, Category, Comment
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    sliderdata = Content.objects.all()[:3]
+    sliderdata = Content.objects.all()[:4]
     category = Category.objects.all()
     daycontents =Content.objects.all()[:3]
     lastcontents = Content.objects.all().order_by('-id')[:3]
@@ -43,8 +44,6 @@ def referanslarimiz(request):
 
 
 def iletisim(request):
-
-
     if request.method == 'POST':
         form = ContactFormu(request.POST)
         if form.is_valid():
@@ -182,3 +181,42 @@ def faq(request):
     setting = Setting.objects.get(pk=1)
     context = {'faq': faq, 'category': category, 'setting': setting}
     return render(request, 'faq.html', context)
+
+def menu(request, id):
+    aktivite = Aktivite.objects.get(menu_id=id)
+    if aktivite:
+        link='/aktivite/'+str(aktivite.id)+'/menu'
+        return HttpResponseRedirect(link)
+
+    else:
+        messages.warning(request, "hata ! ilgili içerik bulunamadı")
+        link='/'
+        return HttpResponseRedirect(link)
+
+
+def aktivitedetail(request,id, slug):
+    category = Category.objects.all()
+    menu = Menu.objects.all()
+    aktivite = Aktivite.objects.get(pk=id)
+    images = AImages.objects.filter(aktivite_id=id)
+    comments = Comment.objects.filter(aktivite_id=id, status='True')
+    context = {'aktivite': aktivite,
+               'category': category,
+               'menu': menu,
+               'images': images,
+               'comments': comments,
+
+              }
+
+    return render(request, 'content_detail.html', context)
+
+
+
+def category_usercontents(request, id, slug):
+    setting = Setting.objects.get(pk=1)
+    categorydata = Category.objects.get(pk=id)
+    usercontents = UserContents.objects.filter(category_id=id, status='True')
+    category = Category.objects.all()
+    context = {'setting': setting, 'usercontents': usercontents, 'category': category, 'categorydata': categorydata, }
+    return render(request, 'contents.html', context)
+
