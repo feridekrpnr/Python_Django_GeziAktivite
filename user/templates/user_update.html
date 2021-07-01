@@ -1,0 +1,79 @@
+{% extends "homebase.html" %}
+
+
+{% block title %} {{ profile.user_name }} Profile {% endblock %}
+
+{% block keywords %}{{ setting.keywords }} {% endblock %}
+
+{% block description%}{{ setting.description }} {% endblock %}
+{% block head %}
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
+
+
+
+{% block content %}
+
+
+
+ <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row d-flex align-items-center flex-wrap">
+                <div class="col-md-7">
+                    <h1 class="h2">User Profile</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb d-flex justify-content-end">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">User Information</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="container">
+            <div class="row bar">
+                <div class="col-lg-9">
+                    <h2>UPDATE INFORMATION</h2>
+                    <hr>
+                    <div class="media">
+                        <img src="{{ user.userprofile.image.url }}" style="height: 150px; border-radius: 45px">
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div id=" sendmessage " class="alert alert-{{ message.tags }}" ROLE="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <table>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+
+                          <th>
+                           <br> {{ user_form.as_p }}
+                           <br> {{ profile_form.as_p }}
+                            </th>
+                          </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Update</button>
+                        </div>
+
+                    </form>
+                        </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
