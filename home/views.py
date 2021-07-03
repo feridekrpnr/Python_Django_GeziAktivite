@@ -14,7 +14,11 @@ from content.models import Content, Images, Category, Comment
 
 
 def index(request):
-    setting = Setting.objects.get(pk=1)
+    try:
+
+        setting = Setting.objects.get(pk=1)
+    except:
+        setting = None
     sliderdata = Content.objects.all()[:4]
     category = Category.objects.all()
     daycontents =Content.objects.all()[:3]
@@ -198,7 +202,7 @@ def aktivitedetail(request,id, slug):
     category = Category.objects.all()
     menu = Menu.objects.all()
     aktivite = Aktivite.objects.get(pk=id)
-    images = AImages.objects.filter(aktivite_id=id)
+    images = AktiviteImages.objects.filter(aktivite_id=id)
     comments = Comment.objects.filter(aktivite_id=id, status='True')
     context = {'aktivite': aktivite,
                'category': category,

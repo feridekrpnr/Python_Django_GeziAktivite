@@ -1,10 +1,16 @@
+from functools import partial
+from itertools import groupby
+from operator import attrgetter
+from django.forms.models import ModelChoiceIterator, ModelChoiceField
+
+
+from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput, FileInput
 from django.urls import reverse
-
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
 from mptt.fields import TreeForeignKey
@@ -116,3 +122,57 @@ class CommentForm(ModelForm):
             model = Comment
             fields = ['subject', 'comment', 'rate']
 
+
+class GroupedModelChoiceIterator(ModelChoiceIterator):
+        def __init__(self, field, groupby):
+            self.groupby = groupby
+            super().__init__(field)
+
+        def __iter__(self):
+            if self.field.empty_label is not None:
+                yield ("", self.field.empty_label)
+            queryset = self.queryset
+            # Can't use iterator() when queryset uses prefetch_related()
+            if not queryset._prefetch_related_lookups:
+                queryset = queryset.iterator()
+            for group, objs in groupby(queryset, self.groupby):
+                yield (group, [self.choice(obj) for obj in objs])
+
+
+class GroupedModelChoiceField(ModelChoiceField):
+        def __init__(self, *args, choices_groupby, **kwargs):
+            if isinstance(choices_groupby, str):
+                choices_groupby = attrgetter(choices_groupby)
+            elif not callable(choices_groupby):
+                raise TypeError('choices_groupby must either be a str or a callable accepting a single argument')
+            self.iterator = partial(GroupedModelChoiceIterator, groupby=choices_groupby)
+            super().__init__(*args, **kwargs)
+
+
+
+class ContentForm(ModelForm):
+    category = GroupedModelChoiceField(
+        queryset=Category.objects.all(),
+        choices_groupby='parent'
+    )
+
+    class Meta:
+        model = Content
+        fields = ['category','title','slug','keywords','description','image','city','country','konum','detail']
+        widgets = {
+            'title':TextInput(attrs={'class':'input','placeholder':'title'}),
+            'slug': TextInput(attrs={'class': 'input', 'placeholder': 'slug'}),
+            'keywords': TextInput(attrs={'class': 'input', 'placeholder': 'keywords'}),
+            'description': TextInput(attrs={'class': 'input', 'placeholder': 'description'}),
+            'image': FileInput(attrs={'class': 'input', 'placeholder': 'image'}),
+            'city': TextInput(attrs={'class': 'input', 'placeholder': 'city'}),
+            'country': TextInput(attrs={'class': 'input', 'placeholder': 'country'}),
+            'konum': TextInput(attrs={'class': 'input', 'placeholder': 'konum'}),
+            'detail': CKEditorWidget(),
+        }
+
+
+class AktiviteImageForm(ModelForm):
+        class Meta:
+            model = Images
+            fields=['title','image']

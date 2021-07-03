@@ -1,22 +1,17 @@
 {% extends "homebase.html" %}
 
-
 {% block title %} {{ profile.user_name }} Profile {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
 
-{% block keywords %}{{ setting.keywords }} {% endblock %}
-
-{% block description%}{{ setting.description }} {% endblock %}
 {% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
 
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-</style>
 
-    <link rel='shortcut icon' type='image/x-icon' href={{setting.icon.url}} /> {% endblock %}
-
+{% block topbar %}
+    {% include "topbar.html" %}
+{% endblock %}
 
 {% block content %}
 
@@ -24,12 +19,12 @@ table, th, td {
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">User Comments</h1>
+                    <h1 class="h2">User Messages</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active">User Comments</li>
+                        <li class="breadcrumb-item active">User Messages</li>
                     </ul>
                 </div>
             </div>
@@ -39,7 +34,7 @@ table, th, td {
         <div class="container">
             <div class="row bar">
                 <div class="col-lg-9">
-                    <h1><a>Comments</a></h1>
+                    <h1><a>Messages</a></h1>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -51,7 +46,7 @@ table, th, td {
                                 {% endfor %}
                             {% endif %}
                             <tr>
-                                <th>Content</th>
+                                <th>Place</th>
                                 <th>Rate</th>
                                 <th>Subject</th>
                                 <th>Comment</th>
@@ -61,15 +56,17 @@ table, th, td {
                             </tr>
                             </thead>
                             <tbody>
-                            {% for comment in comments %}
+                            {% for message in messages %}
                                 <tr>
-                                    <td nowrap><a href="/content/{{ comment.content.id }}/{{ comment.content.slug }}"><strong>{{ comment.content.title }}</strong></a></td>
+                                    <td nowrap><a href="/place/{{ message.place.id }}/{{ message.place.slug }}">{{ message.place.title }}</a>
+                                    </td>
                                     <td>{{ comment.rate }}</td>
                                     <td>{{ comment.subject }}</td>
                                     <td>{{ comment.comment }}</td>
                                     <td>{{ comment.status }}</td>
                                     <td>{{ comment.create_at }}</td>
-                                    <td nowrap><a class="btn btn-danger" href="/user/deletecomment/{{ comment.id }}" onclick="return confirm('Will be delete ! Are you sure?')">Delete</a></td>
+                                    <td nowrap><a class="btn btn-danger" href="/user/deletecomment/{{ comment.id }}" onclick="return confirm('Will be delete ! Are you sure?')">Delete</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -87,10 +84,11 @@ table, th, td {
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
                                 <li class="nav-item"><a href="" class="nav-link active"><i class="fa fa-user"></i> My Account</a></li>
-                                <li class="nav-item"><a href="/user/aktivities" class="nav-link">
-                                    <i class="fa fa-list"></i> My aktivite List</a></li>
+                                <li class="nav-item"><a href="/user/aktivities" class="nav-link"><i
+                                        class="fa fa-list"></i> My Aktivite List</a></li>
                                 <li class="nav-item"><a href="/user/comments " class="nav-link"><i class="fa fa-comment"></i> My comments</a></li>
-                               <li class="nav-item"><a href="/logout/" class="nav-link"><i class="fa fa-sign-out"></i>Logout</a></li>
+                                <li class="nav-item"><a href="/user" class="nav-link"><i class="fa fa-user"></i> My account</a></li>
+                                <li class="nav-item"><a href="/logout/" class="nav-link"><i class="fa fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </div>
                     </div>

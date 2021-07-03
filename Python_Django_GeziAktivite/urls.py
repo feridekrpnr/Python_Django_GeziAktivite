@@ -40,8 +40,10 @@ urlpatterns = [
     path('login/', views.login_view, name='login_view'),
     path('signup/', views.signup_view, name='signup_view'),
     path('faq/', views.faq, name='faq'),
+
     path('aktivite/<int:id>/<slug:slug>/', views.aktivitedetail, name='aktivitedetail'),
     path('menu/<int:id>', views.menu, name='menu'),
+
 
 
 ]

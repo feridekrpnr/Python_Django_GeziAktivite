@@ -27,7 +27,7 @@ table, th, td {
                     <h1 class="h2">User Comments</h1>
                 </div>
                 <div class="col-md-5">
-                    <ul class="breadcrumb d-flex justify-content-end">
+                    <ul class="breadcrumb d-flex justify-aktivite-end">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item active">User Comments</li>
                     </ul>
@@ -50,7 +50,7 @@ table, th, td {
 
                 <tr>
                     <th class="text-left">
-                        <a href="/user/addcontent" class="btn btn-template-outlined">Add Content</a>
+                        <a href="/user/addaktivite" class="btn btn-template-outlined">Add aktivite</a>
 
                     </th>
 
@@ -75,12 +75,12 @@ table, th, td {
                                     <td>{{ rs.type }}</td>
                                     <td>{{ rs.category.title }}</td>
                                     <td>{{ rs.status }}</td>
-                                     <td><a href="javascript:;" onclick="window.open('/user/contentaddimge/{{ rs.id }}','gallery','height=600,width=800,top=50,left=150')">
-                                          <img style="height: 40px; width: 40px" src="{% static '' %}img/gallery.png"> </a> </td>
-
+                                     <td><a href="javascript:;" onclick="window.open('/user/aktiviteaddimge/{{ rs.id }}','gallery','height=600,width=800,top=50,left=150')">
+                                         <a class="image"> {{rs.image.url}} </a>
+                                     </a>
                                     <td>{{ rs.create_at }}</td>
-                                    <td nowrap><a class="btn btn-danger" href="/user/contentedit/{{ rs.id }}" >Edit</a>
-                                               <a class="btn btn-danger" href="/user/contentdelete/{{ rs.id }}" onclick="return confirm('Will be delete ! Are you sure?')">Delete</a>
+                                    <td nowrap><a class="btn btn-danger" href="/user/aktiviteedit/{{ rs.id }}" >Edit</a>
+                                               <a class="btn btn-danger" href="/user/aktivitedelete/{{ rs.id }}" onclick="return confirm('Will be delete ! Are you sure?')">Delete</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -97,16 +97,18 @@ table, th, td {
                     <!-- CUSTOMER MENU -->
                     <div class="panel panel-default sidebar-menu">
                         <div class="panel-heading">
-                            <h3 class="h4 panel-title">Customer section</h3>
+                            <h3 class="h4 panel-title"></h3>
                         </div>
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
                                 <li class="nav-item"><a href="" class="nav-link active"><i
                                         class="fa fa-user"></i> My Account</a></li>
-                                       <li class="nav-item"><a href="/user/contents" class="nav-link"><i
-                                        class="fa fa-list"></i> My Content List</a></li>
+
+                                       <li class="nav-item"><a href="/user/aktivities" class="nav-link"><i
+                                        class="fa fa-list"></i> My Aktivite List</a></li>
+
                                 <li class="nav-item"><a href="/user/comments " class="nav-link"><i
-                                        class="fa fa-comment"></i> My comments</a></li>
+                                        class="fa fa-comment"></i> My Comments</a></li>
                                 <li class="nav-item"><a href="/user " class="nav-link"><i class="fa fa-user"></i> My
                                     account</a></li>
                                 <li class="nav-item"><a href="/logout/" class="nav-link"><i class="fa fa-sign-out"></i>
@@ -115,8 +117,16 @@ table, th, td {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+
+
+
+                                  {% for obj in checked %}
+                                  {{ obj.title }}
+                                  {{ obj.user }}
+                                  {{ obj.description }}
+                                  {% endfor %}
+
+
 
 {% endblock %}
